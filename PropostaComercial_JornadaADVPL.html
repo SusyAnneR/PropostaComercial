@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta Comercial — Landing Page Curso ADVPL</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #080b12;
+  --bg2:       #0c1018;
+  --bg3:       #101520;
+  --card:      #111827;
+  --card2:     #141d2e;
+  --ink:       #eef0f6;
+  --ink2:      #8892a4;
+  --ink3:      #4a5568;
+  --accent:    #ff6b35;
+  --accent2:   #ff8c5a;
+  --accent-d:  rgba(255,107,53,0.12);
+  --accent-g:  rgba(255,107,53,0.06);
+  --gold:      #f0c040;
+  --gold-d:    rgba(240,192,64,0.12);
+  --teal:      #00d4aa;
+  --teal-d:    rgba(0,212,170,0.1);
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(255,107,53,0.22);
+  --glow:      0 0 40px rgba(255,107,53,0.15);
+  --r:         10px;
+  --r-lg:      18px;
+}
+
+/* ═══ NETFLIX INTRO ═══ */
+#netflix-intro {
+  position: fixed;
+  inset: 0;
+  background: black;
+  color: white;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'Outfit', sans-serif;
+}
+
+.scene {
+  position: absolute;
+  text-align: center;
+  font-size: 2rem;
+  opacity: 0;
+  transform: scale(1.2);
+  letter-spacing: 2px;
+}
+
+.scene.main h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  letter-spacing: 3px;
+}
+
+.scene.main p {
+  font-size: 1rem;
+  color: #aaa;
+  letter-spacing: 4px;
+}
+
+@keyframes cinematicIn {
+  0%   { opacity: 0; transform: scale(1.4); filter: blur(10px); }
+  40%  { opacity: 1; transform: scale(1);   filter: blur(0); }
+  80%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(0.9); }
+}
+
+@keyframes cinematicFinal {
+  0%   { opacity: 0; transform: scale(1.5); filter: blur(15px); }
+  60%  { opacity: 1; transform: scale(1);   filter: blur(0); }
+  100% { opacity: 1; }
+}
+
+.scene-1 { animation: cinematicIn    3s ease forwards; }
+.scene-2 { animation: cinematicIn    3s ease forwards; animation-delay: 3s; }
+.scene-3 { opacity: 1; }
+.scene-3.main { opacity: 1; }
+
+.scene-3 h1 {
+  opacity: 0;
+  transform: scale(1.15);
+  animation: nameReveal 1.8s ease forwards;
+  animation-delay: 6s;
+}
+
+@keyframes nameReveal {
+  0%   { opacity: 0; transform: scale(1.15); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.scene-3 p {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeSlideUp 1s ease forwards;
+  animation-delay: 8s;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+#particles-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  opacity: 0.4;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1; opacity: 0.5;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 6%;
+  background: rgba(8,11,18,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.3s;
+}
+nav.scrolled { padding: 0.7rem 6%; }
+.nav-brand {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600; font-size: 0.85rem;
+  color: var(--ink2); letter-spacing: 0.02em;
+}
+.nav-brand strong { color: var(--ink); }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+.nav-date {
+  font-size: 0.72rem; color: var(--ink3);
+  font-family: 'JetBrains Mono', monospace;
+}
+.nav-badge {
+  font-size: 0.68rem; font-weight: 500;
+  color: var(--accent);
+  background: var(--accent-d);
+  border: 1px solid var(--border2);
+  padding: 0.28rem 0.85rem;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.04em;
+  animation: badgePulse 3s ease-in-out infinite;
+}
+@keyframes badgePulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,107,53,0); }
+  50%      { box-shadow: 0 0 12px 2px rgba(255,107,53,0.2); }
+}
+
+#progress-bar {
+  position: fixed; top: 0; left: 0; z-index: 201;
+  height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(255,107,53,0.6);
+}
+
+.reveal, .reveal-left, .reveal-right {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(.25,.46,.45,.94),
+              transform 0.7s cubic-bezier(.25,.46,.45,.94);
+}
+.reveal       { transform: translateY(30px); }
+.reveal-left  { transform: translateX(-30px); }
+.reveal-right { transform: translateX(30px); }
+
+.reveal.visible, .reveal-left.visible, .reveal-right.visible {
+  opacity: 1; transform: translate(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+#cover {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 6% 80px;
+  position: relative; overflow: hidden;
+  z-index: 2;
+}
+.cover-glow-1 {
+  position: absolute; width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(255,107,53,0.08) 0%, transparent 70%);
+  top: -150px; right: -150px; pointer-events: none;
+  animation: floatGlow 8s ease-in-out infinite;
+}
+.cover-glow-2 {
+  position: absolute; width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(240,192,64,0.05) 0%, transparent 70%);
+  bottom: -100px; left: -100px; pointer-events: none;
+  animation: floatGlow 10s ease-in-out infinite reverse;
+}
+@keyframes floatGlow {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%     { transform: translate(20px,-20px) scale(1.05); }
+  66%     { transform: translate(-15px,15px) scale(0.97); }
+}
+
+.cover-grid-lines {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+}
+
+.cover-inner {
+  align-items: center;
+  max-width: 1100px; margin: 0 auto; width: 100%;
+  position: relative; z-index: 2;
+}
+
+.cover-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem; letter-spacing: 0.12em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 3rem;
+}
+.cover-label::before {
+  content: ''; width: 30px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent));
+}
+.cover-label .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1.4rem;
+}
+h1 em {
+  color: var(--accent); font-style: italic;
+  position: relative;
+}
+h1 em::after {
+  content: '';
+  position: absolute; bottom: -2px; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  animation: lineGrow 1s 0.8s ease both;
+  transform-origin: left;
+}
+@keyframes lineGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.cover-sub {
+  font-size: 1.05rem; color: var(--ink2);
+  max-width: 490px; font-weight: 300; line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+.cover-meta {
+  display: flex; 
+  gap: 4rem; 
+  flex-wrap: wrap;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+.meta-label {
+  display: block;
+  font-size: 0.9rem; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--ink3);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 0.25rem;
+}
+.meta-value { font-weight: 600; font-size: 1rem; color: var(--ink); }
+
+section { padding: 90px 6%; position: relative; z-index: 2; }
+.container      { max-width: 900px; margin: 0 auto; }
+.container-wide { max-width: 1100px; margin: 0 auto; }
+
+.s-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.2rem;
+}
+.s-tag-num {
+  width: 22px; height: 22px; flex-shrink: 0;
+  background: var(--accent-d); border: 1px solid var(--border2);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem; color: var(--accent);
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+  line-height: 1.2; letter-spacing: -0.015em;
+  color: var(--ink); margin-bottom: 1rem;
+}
+h2 em { color: var(--accent); font-style: italic; }
+h3 { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1rem; color: var(--ink); margin-bottom: 0.35rem; }
+.s-lead { font-size: 0.98rem; color: var(--ink2); max-width: 640px; font-weight: 300; line-height: 1.75; margin-bottom: 3rem; }
+
+#diagnostico { background: var(--bg2); }
+
+.diag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.2rem; margin-top: 2.5rem;
+}
+.diag-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.6rem;
+  position: relative; overflow: hidden;
+  cursor: default;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.diag-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: rgba(226,75,74,0.6);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.diag-card:hover { border-color: rgba(226,75,74,0.3); transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+.diag-card:hover::before { transform: scaleX(1); }
+.diag-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(226,75,74,0.04), transparent 70%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.diag-card:hover::after { opacity: 1; }
+.diag-icon {
+  width: 40px; height: 40px;
+  background: rgba(226,75,74,0.1); border: 1px solid rgba(226,75,74,0.2);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; margin-bottom: 1rem; position: relative; z-index: 1;
+  transition: transform 0.3s;
+}
+.diag-card:hover .diag-icon { transform: scale(1.1) rotate(-5deg); }
+.diag-card p { font-size: 0.87rem; color: var(--ink2); margin-top: 0.3rem; line-height: 1.65; position: relative; z-index: 1; }
+
+.proposta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin-top: 2.5rem;
+}
+@media (max-width: 768px) { .proposta-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px)  { .proposta-grid { grid-template-columns: 1fr; } }
+
+.proposta-item {
+  background: var(--card);
+  padding: 2rem 1.8rem;
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+}
+.proposta-item:hover { background: var(--card2); }
+.proposta-item::before {
+  content: attr(data-num);
+  position: absolute;
+  right: -8px; bottom: -18px;
+  font-family: 'Playfair Display', serif;
+  font-size: 6rem; font-weight: 800;
+  color: rgba(255,107,53,0.04);
+  line-height: 1;
+  pointer-events: none;
+  transition: color 0.3s;
+  user-select: none;
+}
+.proposta-item:hover::before { color: rgba(255,107,53,0.08); }
+.proposta-item::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.proposta-item:hover::after { transform: scaleX(1); }
+
+.pi-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; color: var(--accent);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  display: block; margin-bottom: 1rem;
+  opacity: 0.7;
+}
+.pi-icon {
+  font-size: 1.4rem;
+  display: block; margin-bottom: 0.9rem;
+  transition: transform 0.3s;
+}
+.proposta-item:hover .pi-icon { transform: scale(1.15) rotate(-5deg); }
+.pi-title {
+  font-size: 0.92rem; font-weight: 600;
+  color: var(--ink); margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.pi-desc {
+  font-size: 0.83rem; color: var(--ink2);
+  line-height: 1.65;
+}
+
+.proposta-tags-wrap {
+  margin-top: 2rem;
+  display: flex; flex-direction: column; gap: 0.9rem;
+}
+.proposta-tag-row {
+  display: flex; align-items: baseline;
+  gap: 0.75rem; flex-wrap: wrap;
+}
+.proposta-tag-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--ink3);
+  white-space: nowrap; flex-shrink: 0;
+  padding-top: 2px;
+}
+.ptag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.78rem; padding: 0.28rem 0.75rem;
+  border-radius: 100px;
+  transition: border-color 0.2s;
+}
+.ptag-yes {
+  background: var(--teal-d);
+  border: 1px solid rgba(0,212,170,0.2);
+  color: var(--teal);
+}
+.ptag-yes::before { content: '✓'; font-size: 0.65rem; }
+
+#escopo { background: var(--bg2); }
+.escopo-table { width: 100%; border-collapse: collapse; margin-top: 2rem; border-radius: var(--r-lg); overflow: hidden; }
+.escopo-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--ink3); padding: 0.85rem 1.2rem; text-align: left;
+  background: var(--bg3); border-bottom: 1px solid var(--border);
+}
+.escopo-table td {
+  padding: 1rem 1.2rem; font-size: 0.88rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top; background: var(--card);
+  color: var(--ink2); transition: background 0.2s;
+}
+.escopo-table tr:hover td { background: var(--card2); }
+.escopo-table tr:last-child td { border-bottom: none; }
+.escopo-table td strong { color: var(--ink); display: block; margin-bottom: 0.2rem; }
+.entregavel-badge {
+  display: inline-block; font-size: 0.65rem;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 0.15rem 0.55rem; border-radius: 100px;
+  background: var(--accent-d); color: var(--accent);
+  border: 1px solid var(--border2); margin-bottom: 0.4rem;
+}
+.include-yes { color: var(--teal); font-weight: 600; font-size: 0.82rem; }
+
+.about-wrap {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 4rem;
+  align-items: start;
+  margin-top: 1.5rem;
+}
+@media (max-width: 900px) { .about-wrap { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+.about-left { position: relative; }
+
+.about-header {
+  display: flex; align-items: center; gap: 1.1rem;
+  margin-bottom: 1.4rem;
+}
+.about-avatar {
+  width: 58px; height: 58px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent-d);
+  border: 2px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 700;
+  color: var(--accent);
+  position: relative;
+}
+.about-avatar::after {
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  animation: avatarPulse 3s ease-in-out infinite;
+}
+@keyframes avatarPulse {
+  0%,100% { opacity: 0.4; transform: scale(1); }
+  50%     { opacity: 1;   transform: scale(1.05); }
+}
+.about-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700; font-style: italic;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+.about-title {
+  font-size: 0.72rem; color: var(--ink3);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+.about-bio {
+  font-size: 0.93rem; color: var(--ink2);
+  line-height: 1.85; font-weight: 300;
+  border-left: 2px solid var(--border2);
+  padding-left: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.about-skills { display: flex; flex-direction: column; }
+.about-skill {
+  display: flex; align-items: baseline; gap: 0.9rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: padding-left 0.25s ease;
+  cursor: default;
+}
+.about-skill:first-child { border-top: 1px solid var(--border); }
+.about-skill:hover { padding-left: 6px; }
+.about-skill-dot {
+  width: 5px; height: 5px; flex-shrink: 0;
+  border-radius: 50%; background: var(--accent);
+  margin-top: 7px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.about-skill:hover .about-skill-dot {
+  transform: scale(1.6);
+  box-shadow: 0 0 6px var(--accent);
+}
+.about-skill-content { flex: 1; }
+.about-skill-content strong {
+  font-size: 0.87rem; font-weight: 600; color: var(--ink);
+}
+.about-skill-content span {
+  font-size: 0.86rem; color: var(--ink3);
+}
+
+.about-stats-wrap {
+  position: sticky; top: 100px;
+  display: flex; flex-direction: column; gap: 0.85rem;
+}
+.about-stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.3rem 1.5rem;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.about-stat:hover {
+  border-color: var(--border2);
+  transform: translateX(-4px);
+}
+.about-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem; font-weight: 700;
+  color: var(--accent); line-height: 1;
+  display: block; margin-bottom: 0.35rem;
+}
+.about-stat-label {
+  font-size: 0.8rem; color: var(--ink2); line-height: 1.5;
+}
+.about-quote {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.3rem 1.5rem;
+}
+.about-quote-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--ink3);
+  display: block; margin-bottom: 0.7rem;
+}
+.about-quote-text {
+  font-size: 0.84rem; color: var(--ink2);
+  line-height: 1.7; font-style: italic;
+}
+
+/* ROI banner */
+.roi-banner {
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-radius: var(--r-lg);
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+}
+.roi-banner-icon { font-size: 1.8rem; flex-shrink: 0; }
+.roi-banner-text { flex: 1; min-width: 220px; }
+.roi-banner-text strong { color: var(--accent); display: block; font-size: 0.95rem; margin-bottom: 0.3rem; }
+.roi-banner-text p { font-size: 0.83rem; color: var(--ink2); line-height: 1.6; }
+
+.invest-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2rem; margin-top: 2.5rem;
+}
+@media (max-width: 768px) { .invest-grid { grid-template-columns: 1fr; } }
+
+.invest-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 2rem;
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.invest-card:hover { transform: translateY(-6px); }
+.invest-card.featured {
+  border-color: var(--border2);
+  background: var(--card2);
+}
+.invest-card.featured:hover { box-shadow: var(--glow); }
+.invest-card.featured::before {
+  content: 'Recomendado';
+  position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #fff;
+  font-size: 0.65rem; font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.28rem 1rem;
+  border-radius: 0 0 var(--r) var(--r);
+}
+.invest-card.featured::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,107,53,0.06), transparent);
+  pointer-events: none;
+}
+
+.invest-plan {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+  color: var(--ink3); text-transform: uppercase; letter-spacing: 0.1em;
+  display: block; margin-bottom: 0.8rem;
+}
+.invest-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem; font-weight: 700; color: var(--ink); line-height: 1;
+}
+.invest-price sup {
+  font-size: 1rem; color: var(--ink2);
+  vertical-align: top; margin-top: 0.5rem; display: inline-block;
+}
+.invest-divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+.invest-scope-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--ink3);
+  display: block; margin-bottom: 0.75rem;
+}
+.invest-scope-list {
+  display: flex; flex-direction: column; gap: 6px;
+  margin-bottom: 0;
+}
+.invest-scope-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.84rem; font-weight: 500; color: var(--ink);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 9px 14px;
+  transition: border-color 0.2s;
+}
+.invest-scope-item:hover { border-color: rgba(255,255,255,0.13); }
+.invest-scope-item .scope-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0;
+}
+.invest-scope-item.extra {
+  background: rgba(255, 107, 53, 0.07);
+  border-color: rgba(255, 107, 53, 0.22);
+  color: #ffb08a;
+}
+.invest-scope-item.extra .scope-dot { background: var(--accent2); }
+
+.invest-item {
+  display: flex; gap: 0.65rem; align-items: flex-start;
+  font-size: 0.86rem; color: var(--ink2); margin-bottom: 0.65rem;
+}
+.invest-item .ic { flex-shrink: 0; margin-top: 2px; }
+.ic-yes { color: var(--teal); }
+.invest-installment {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; color: var(--ink3);
+  margin-top: 0.4rem;
+}
+
+.btn-proposta {
+  display: block; width: 100%; text-align: center;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #fff; font-family: 'Outfit', sans-serif;
+  font-weight: 600; font-size: 0.93rem;
+  padding: 0.95rem; border-radius: 100px;
+  border: none; cursor: pointer; text-decoration: none;
+  margin-top: 1.8rem; position: relative; overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-proposta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: translateX(-100%); transition: transform 0.6s ease;
+}
+.btn-proposta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,107,53,0.35); }
+.btn-proposta:hover::before { transform: translateX(100%); }
+
+.btn-proposta-ghost {
+  display: block; width: 100%; text-align: center;
+  background: transparent; color: var(--ink);
+  font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.93rem;
+  padding: 0.95rem; border-radius: 100px;
+  border: 1px solid var(--border); cursor: pointer;
+  text-decoration: none; margin-top: 1rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-proposta-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.cond-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem; margin-top: 2.5rem;
+}
+.cond-card {
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.4rem 1.5rem;
+  display: flex; align-items: flex-start; gap: 1rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.cond-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.cond-icon {
+  font-size: 1.1rem;
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: var(--accent-d); border: 1px solid var(--border2);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px;
+}
+.cond-card h4 { font-size: 0.88rem; color: var(--accent2); margin-bottom: 0.3rem; font-weight: 600; }
+.cond-card p { font-size: 0.80rem; color: var(--ink2); line-height: 1.55; }
+
+#proximos {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+}
+.steps-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem; margin: 2.5rem 0;
+}
+.next-step {
+  border-left: 2px solid var(--border);
+  padding-left: 1.3rem;
+  transition: border-color 0.3s;
+}
+.next-step:hover { border-color: var(--accent); }
+.next-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  display: block; margin-bottom: 0.5rem;
+}
+.next-step h4 { font-size: 0.95rem; color: var(--ink); margin-bottom: 0.3rem; }
+.next-step p { font-size: 0.84rem; color: var(--ink2); line-height: 1.55; }
+
+.cta-block {
+  display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;
+}
+.btn-cta-main {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #fff; font-family: 'Outfit', sans-serif;
+  font-weight: 600; font-size: 1rem;
+  padding: 1rem 2.2rem; border-radius: 100px;
+  border: none; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  position: relative; overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-cta-main:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255,107,53,0.35); }
+.btn-cta-main::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: translateX(-100%); transition: transform 0.6s;
+}
+.btn-cta-main:hover::before { transform: translateX(100%); }
+
+.btn-cta-sec {
+  background: transparent; color: var(--ink2);
+  font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1rem;
+  padding: 1rem 2.2rem; border-radius: 100px;
+  border: 1px solid var(--border); cursor: pointer;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-cta-sec:hover { border-color: rgba(255,255,255,0.3); color: var(--ink); }
+.validity-note {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 1.5rem; font-size: 0.78rem; color: var(--ink3);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.divider { height: 1px; background: var(--border); position: relative; z-index: 2; }
+
+.floating-cta {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 150;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.4s, transform 0.4s;
+  pointer-events: none;
+}
+.floating-cta.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+.floating-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; border: none; cursor: pointer;
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; box-shadow: 0 4px 20px rgba(255,107,53,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+.floating-btn:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(255,107,53,0.5); }
+.floating-btn-label {
+  position: absolute; right: 62px; top: 50%; transform: translateY(-50%);
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--ink); font-size: 0.78rem; white-space: nowrap;
+  padding: 0.35rem 0.9rem; border-radius: 100px;
+  opacity: 0; transition: opacity 0.2s; pointer-events: none;
+}
+.floating-cta:hover .floating-btn-label { opacity: 1; }
+
+#cursor-glow {
+  position: fixed; width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,107,53,0.04) 0%, transparent 70%);
+  pointer-events: none; z-index: 1;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out;
+}
+</style>
+</head>
+<body>
+
+<div id="netflix-intro">
+  <div class="scene scene-1">Uma nova forma de criar experiências digitais</div>
+  <div class="scene scene-2">Design. Código. Estratégia.</div>
+  <div class="scene scene-3 main">
+    <h1>Susy Ramos</h1>
+    <p>Desenvolvedora Digital — Web, Mobile & Soluções sob Medida</p>
+  </div>
+</div>
+
+<div id="cursor-glow"></div>
+<canvas id="particles-canvas"></canvas>
+<div id="progress-bar"></div>
+
+<div class="floating-cta" id="floating-cta">
+  <div class="floating-btn-label">Aprovar proposta</div>
+  <a href="#proximos" class="floating-btn">→</a>
+</div>
+
+<nav id="navbar">
+  <div class="nav-brand">Proposta Comercial · <strong>Jornada ADVPL</strong></div>
+  <div class="nav-right">
+    <span class="nav-date">Maio / 2026</span>
+    <span class="nav-badge">Ref. #PA-2025-04</span>
+  </div>
+</nav>
+
+<!-- ═══ COVER ═══ -->
+<section id="cover">
+  <div class="cover-glow-1"></div>
+  <div class="cover-glow-2"></div>
+  <div class="cover-grid-lines"></div>
+  <div class="cover-inner">
+    <div>
+      <div class="cover-label reveal">
+        <span class="dot"></span>
+        Proposta Comercial Exclusiva
+      </div>
+      <h1 class="reveal reveal-delay-1" style="margin-bottom: 6rem;">
+        Landing Page de Alta Conversão para o Curso <em>ADVPL</em>
+      </h1>
+      <div class="cover-meta reveal reveal-delay-3">
+        <div class="meta-item">
+          <span class="meta-label">PROFISSIONAL</span>
+          <span class="meta-value">Susy Ramos</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">CLIENTE</span>
+          <span class="meta-value">Luis Otávio</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">DATA</span>
+          <span class="meta-value">13/05/2026</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">VALIDADE</span>
+          <span class="meta-value">7 Dias</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ DIAGNÓSTICO ═══ -->
+<section id="diagnostico">
+  <div class="container-wide">
+    <div class="s-tag reveal"><span class="s-tag-num">01</span> Diagnóstico</div>
+    <h2 class="reveal reveal-delay-1">Por que a maioria das <br>páginas de curso <em>não convertem</em>?</h2>
+    <p class="s-lead reveal reveal-delay-2">O produto é sólido — a apresentação é que precisa trabalhar por ele.</p>
+    <div class="diag-grid">
+      <div class="diag-card reveal reveal-delay-1">
+        <div class="diag-icon">🎯</div>
+        <h3>Headline que não diz nada em 3 segundos</h3>
+        <p>O visitante abre a página e não entende o que vai ganhar. Se a promessa não aparecer de cara — antes do scroll —, ele vai embora. Simples assim.</p>
+      </div>
+      <div class="diag-card reveal reveal-delay-2">
+        <div class="diag-icon">📐</div>
+        <h3>Página que informa, mas não convence</h3>
+        <p>Listar módulos não é a mesma coisa que vender uma transformação. A página precisa primeiro fazer o visitante sentir o problema para depois apresentar a solução.</p>
+      </div>
+      <div class="diag-card reveal reveal-delay-3">
+        <div class="diag-icon">💬</div>
+        <h3>Copy técnico demais, humano de menos</h3>
+        <p>Quem compra um curso não quer ler um catálogo — quer se ver no resultado. "Aprenda ADVPL do zero e conquiste as vagas mais valorizadas do mercado Protheus" vende mais do que "Módulo 1: Sintaxe básica".</p>
+      </div>
+      <div class="diag-card reveal reveal-delay-1">
+        <div class="diag-icon">🔘</div>
+        <h3>CTAs genéricos nos lugares errados</h3>
+        <p>Um único botão "Comprar" no fim da página desperdiça todo o engajamento gerado ao longo da leitura. O convite para comprar precisa aparecer no momento certo — quando a motivação está no pico.</p>
+      </div>
+      <div class="diag-card reveal reveal-delay-2">
+        <div class="diag-icon">🎨</div>
+        <h3>Visual que não transmite especialização</h3>
+        <p>No mercado TOTVS, aparência importa. Um design genérico faz o curso parecer amador — mesmo que o conteúdo seja excelente. O visual precisa comunicar autoridade antes de qualquer palavra.</p>
+      </div>
+      <div class="diag-card reveal reveal-delay-3">
+        <div class="diag-icon">📱</div>
+        <h3>Mobile ignorado — onde a maioria compra</h3>
+        <p>Mais de 60% do tráfego de infoprodutos vem do celular. Se a página não foi feita pensando primeiro no mobile, você está perdendo mais da metade das suas vendas potenciais.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROPOSTA ═══ -->
+<section id="proposta">
+  <div class="container-wide">
+    <div class="s-tag reveal"><span class="s-tag-num">02</span> Nossa Proposta</div>
+    <h2 class="reveal reveal-delay-1">Uma página construída<br>para <em>vender, não só mostrar</em></h2>
+    <p class="s-lead reveal reveal-delay-2">
+      A Jornada Desenvolvedor ADVPL já foi construída do zero: com copy estratégico, 12 seções completas, design voltado ao mercado tech/ERP e código HTML otimizado para performance e conversão.
+    </p>
+
+    <div class="proposta-grid reveal">
+      <div class="proposta-item" data-num="01">
+        <span class="pi-num">01</span>
+        <span class="pi-icon">🧠</span>
+        <div class="pi-title">Copy baseado nas dores reais do público</div>
+        <p class="pi-desc">A página abre identificando as três frustrações mais comuns de quem tenta aprender ADVPL sozinho — material desorganizado, código legado complexo e mercado fechado. O visitante lê e pensa: "é exatamente o que eu vivo". Só então a solução entra.</p>
+      </div>
+      <div class="proposta-item" data-num="02">
+        <span class="pi-num">02</span>
+        <span class="pi-icon">✍️</span>
+        <div class="pi-title">5 módulos descritos como jornada, não como lista</div>
+        <p class="pi-desc">Cada uma das 5 etapas do curso tem título, contexto, resultado prático e lista de aprendizados — escritos para o aluno se ver progredindo, não para descrever aula. A Etapa 5, por exemplo, é posicionada como "o diferencial que separa desenvolvedores comuns de especialistas valorizados".</p>
+      </div>
+      <div class="proposta-item" data-num="03">
+        <span class="pi-num">03</span>
+        <span class="pi-icon">🏆</span>
+        <div class="pi-title">Autoridade do instrutor bem construída</div>
+        <p class="pi-desc">A seção do Luiz Otávio não é apenas um "sobre mim" — é prova social: 15+ anos de experiência, 100+ projetos entregues, certificação TOTVS e atuação em médio e grande porte. Cada dado existe para reduzir o risco percebido pelo comprador.</p>
+      </div>
+      <div class="proposta-item" data-num="04">
+        <span class="pi-num">04</span>
+        <span class="pi-icon">💬</span>
+        <div class="pi-title">Depoimentos reais de alunos empregados</div>
+        <p class="pi-desc">A página apresenta depoimentos de Diogo Dorneles e Lucas Ribeiro — dois alunos que entraram no mercado após o curso. Depoimentos com nome, cargo e história pessoal têm muito mais poder do que avaliações genéricas com estrelas.</p>
+      </div>
+      <div class="proposta-item" data-num="05">
+        <span class="pi-num">05</span>
+        <span class="pi-icon">📊</span>
+        <div class="pi-title">Urgência, garantia e gestão de objeções</div>
+        <p class="pi-desc">Badge de "Vagas abertas por tempo limitado" no topo, garantia incondicional de 7 dias em destaque, seção "Este Curso É Para Você?" que filtra e qualifica — e FAQ para eliminar as dúvidas que impedem a compra no último segundo.</p>
+      </div>
+      <div class="proposta-item" data-num="06">
+        <span class="pi-num">06</span>
+        <span class="pi-icon">📱</span>
+        <div class="pi-title">HTML puro, responsivo e sem dependências</div>
+        <p class="pi-desc">Código limpo em HTML/CSS sem frameworks pesados — carrega rápido, roda em qualquer plataforma e é fácil de manter. A versão mobile foi priorizada, onde a maior parte do tráfego de infoprodutos acontece.</p>
+      </div>
+    </div>
+
+    <div class="proposta-tags-wrap reveal">
+      <div class="proposta-tag-row">
+        <span class="proposta-tag-label">Incluso</span>
+        <span class="ptag ptag-yes">Copy persuasiva</span>
+        <span class="ptag ptag-yes">Design HTML responsivo</span>
+        <span class="ptag ptag-yes">Versão mobile otimizada</span>
+        <span class="ptag ptag-yes">SEO técnico e on-page</span>
+        <span class="ptag ptag-yes">Performance & Core Web Vitals</span>
+        <span class="ptag ptag-yes">CRO</span>
+        <span class="ptag ptag-yes">Hospedagem</span>
+        <span class="ptag ptag-yes">Integração com pagamento</span>
+        <span class="ptag ptag-yes">Suporte 30 dias</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ SOBRE A DESENVOLVEDORA ═══ -->
+<section id="about">
+  <div class="container-wide">
+    <div class="s-tag reveal"><span class="s-tag-num">03</span> Quem vai cuidar do seu projeto</div>
+
+    <div class="about-wrap">
+
+      <div class="about-left reveal-left">
+        <div class="about-header">
+          <div class="about-avatar">SR</div>
+          <div class="about-header-info">
+            <div class="about-name">Susy Ramos</div>
+            <div class="about-title">Desenvolvedora Web · Estrategista Digital</div>
+          </div>
+        </div>
+
+        <p class="about-bio">
+          Sou formada em Ciência da Computação, pós-graduada em Engenharia de Software e trabalho com desenvolvimento web há mais de 5 anos. Quando entrei em contato com o seu projeto, estudei o mercado ADVPL, os concorrentes e o perfil do profissional que você quer alcançar — porque entregar uma página bonita sem entender o negócio não é o que eu faço. O que você vai receber é uma página pensada de dentro para fora: estratégia, copy e código trabalhando juntos para converter.
+        </p>
+
+        <div class="about-skills">
+          <div class="about-skill">
+            <span class="about-skill-dot"></span>
+            <div class="about-skill-content">
+              <strong>Bacharelado em Ciência da Computação</strong>
+              <span> — cada decisão técnica tem fundamentação, não é chute</span>
+            </div>
+          </div>
+          <div class="about-skill">
+            <span class="about-skill-dot"></span>
+            <div class="about-skill-content">
+              <strong>Pós-graduação em Engenharia de Software</strong>
+              <span> — arquitetura, qualidade e performance aplicadas em cada projeto</span>
+            </div>
+          </div>
+          <div class="about-skill">
+            <span class="about-skill-dot"></span>
+            <div class="about-skill-content">
+              <strong>5+ anos desenvolvendo para a web</strong>
+              <span> — projetos que precisam funcionar de verdade, não só impressionar em screenshot</span>
+            </div>
+          </div>
+          <div class="about-skill">
+            <span class="about-skill-dot"></span>
+            <div class="about-skill-content">
+              <strong>Pesquisa de mercado feita antes de qualquer linha de código</strong>
+              <span> — entendo o seu público antes de escrever para ele</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-stats-wrap reveal-right">
+        <div class="about-stat">
+          <span class="about-stat-num">5+</span>
+          <span class="about-stat-label">anos entregando projetos digitais com foco em resultado</span>
+        </div>
+        <div class="about-stat">
+          <span class="about-stat-num">100%</span>
+          <span class="about-stat-label">dedicação ao seu projeto — sem entrega genérica</span>
+        </div>
+        <div class="about-quote">
+          <span class="about-quote-label">Compromisso</span>
+          <p class="about-quote-text">"Só entrego quando a página está pronta para converter — não quando o prazo acabou. Cada detalhe, do pixel ao tempo de carregamento, é revisado antes de você receber."</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ESCOPO ═══ -->
+<section id="escopo">
+  <div class="container">
+    <div class="s-tag reveal"><span class="s-tag-num">04</span> Escopo Detalhado</div>
+    <h2 class="reveal reveal-delay-1">Tudo o que foi<br><em>entregue</em></h2>
+    <p class="s-lead reveal reveal-delay-2">Cada entregável foi produzido com escopo definido. Sem surpresas — você vê exatamente o que está pagando.</p>
+    <table class="escopo-table reveal">
+      <thead>
+        <tr>
+          <th style="width:40%">Entregável</th>
+          <th style="width:48%">Descrição</th>
+          <th style="width:12%">Incluso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="entregavel-badge">Estratégia</div><strong>Mapa de Público e Posicionamento</strong></td>
+          <td>Pesquisa das dores reais do público ADVPL — material desorganizado, código legado complexo, mercado fechado — que estruturou todo o copy de problema e solução da página.</td>
+          <td class="include-yes">✓ Sim</td>
+        </tr>
+        <tr>
+          <td><div class="entregavel-badge">Copy</div><strong>Texto completo da página</strong></td>
+          <td>12 seções escritas com metodologia de conversão: headline, hero, problema, solução, 5 módulos detalhados com resultado prático, para quem é/não é, depoimentos, instrutor, preço, FAQ e CTAs.</td>
+          <td class="include-yes">✓ Sim</td>
+        </tr>
+        <tr>
+          <td><div class="entregavel-badge">Design + Dev</div><strong>Página HTML finalizada</strong></td>
+          <td>Arquivo HTML/CSS responsivo com identidade visual voltada ao universo tech/ERP, animações sutis, mobile-first e carregamento otimizado. Compatível com qualquer plataforma de hospedagem.</td>
+          <td class="include-yes">✓ Sim</td>
+        </tr>
+        <tr>
+          <td><div class="entregavel-badge">CRO</div><strong>Estrutura de conversão</strong></td>
+          <td>Badge de urgência, CTAs múltiplos em pontos estratégicos, seção de qualificação "Para quem é/não é", garantia de 7 dias em destaque e FAQ para eliminar objeções na reta final.</td>
+          <td class="include-yes">✓ Sim</td>
+        </tr>
+        <tr>
+          <td><div class="entregavel-badge">Revisão</div><strong>2 rodadas de ajustes</strong></td>
+          <td>Ajustes de copy, layout e elementos visuais conforme seu feedback. Nada extra é cobrado dentro dessas rodadas — é parte do processo.</td>
+          <td class="include-yes">✓ Sim</td>
+        </tr>
+        <tr>
+          <td><div class="entregavel-badge">Pós-entrega</div><strong>Suporte 30 dias</strong></td>
+          <td>Pequenos ajustes de texto, cor ou layout após a publicação — sem custo adicional. Você lança com segurança sabendo que tem suporte logo atrás.</td>
+          <td class="include-yes">✓ Sim</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ INVESTIMENTO ═══ -->
+<section id="investimento">
+  <div class="container">
+    <div class="s-tag reveal"><span class="s-tag-num">05</span> Investimento</div>
+    <h2 class="reveal reveal-delay-1">Investimento e<br><em>condições</em></h2>
+    <p class="s-lead reveal reveal-delay-2">Uma landing page bem feita não é custo — é a sua estrutura de vendas funcionando enquanto você dorme. Veja como o retorno aparece rápido.</p>
+
+    <!-- ROI Banner -->
+    <div class="roi-banner reveal">
+      <div class="roi-banner-icon">💡</div>
+      <div class="roi-banner-text">
+        <strong>O investimento se paga com 2 alunos</strong>
+        <p>O curso custa R$ 1.200. Se a página converter apenas 2 alunos a mais por mês, o projeto já se pagou inteiro — e continua vendendo por meses ou anos sem nenhum custo adicional.</p>
+      </div>
+    </div>
+
+    <div class="invest-grid">
+
+      <!-- CARD 1 -->
+      <div class="invest-card reveal-left">
+        <span class="invest-plan">Landing Page</span>
+        <div class="invest-price"><sup>R$</sup> 1.500</div>
+
+        <div class="invest-divider"></div>
+
+        <span class="invest-scope-label">O que está incluso</span>
+        <div class="invest-scope-list">
+          <div class="invest-scope-item">
+            <span class="scope-dot"></span>Landing page de alta conversão
+          </div>
+        </div>
+
+        <p class="invest-installment">ou 2× R$ 750,00 sem juros</p>
+
+        <div class="invest-divider"></div>
+
+        <span class="invest-scope-label">Tudo incluído no valor</span>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> Copy persuasiva orientada a conversão</div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> Design HTML profissional e responsivo</div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> Versão mobile totalmente otimizada</div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> SEO técnico e on-page</div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> Performance & Core Web Vitals</div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> CRO — estrutura orientada a conversão</div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> <strong>Hospedagem incluída</strong></div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> <strong>Suporte 30 dias pós-publicação</strong></div>
+
+        <a href="#proximos" class="btn-proposta-ghost">Escolher este escopo →</a>
+      </div>
+
+      <!-- CARD 2 — Recomendado -->
+      <div class="invest-card featured reveal-right">
+        <span class="invest-plan">Landing Page + Página de Links</span>
+        <div class="invest-price"><sup>R$</sup> 1.800</div>
+
+        <div class="invest-divider"></div>
+
+        <span class="invest-scope-label">O que está incluso</span>
+        <div class="invest-scope-list">
+          <div class="invest-scope-item">
+            <span class="scope-dot"></span>Landing page de alta conversão
+          </div>
+          <div class="invest-scope-item extra">
+            <span class="scope-dot"></span>Página de links (bio link) — sua central de conversão nas redes sociais
+          </div>
+        </div>
+
+        <p class="invest-installment">ou 2× R$ 900,00 sem juros</p>
+
+        <div class="invest-divider"></div>
+
+        <span class="invest-scope-label">Tudo incluído no valor</span>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> Copy persuasiva orientada a conversão</div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> Design HTML profissional e responsivo</div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> Versão mobile totalmente otimizada</div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> SEO técnico e on-page</div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> Performance & Core Web Vitals</div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> CRO — estrutura orientada a conversão</div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> <strong>Hospedagem incluída</strong></div>
+        <div class="invest-item"><span class="ic ic-yes">✓</span> <strong>Suporte 30 dias pós-publicação</strong></div>
+
+        <a href="#proximos" class="btn-proposta">Aprovar esta proposta →</a>
+      </div>
+
+    </div>
+
+    <div class="cond-grid">
+      <div class="cond-card reveal">
+        <div class="cond-icon">💳</div>
+        <div>
+          <h4>Forma de pagamento</h4>
+          <p>PIX ou transferência bancária. Parcelamento em até 2× sem juros. Pagamento em duas etapas: 50% para iniciar, 50% na entrega.</p>
+        </div>
+      </div>
+      <div class="cond-card reveal reveal-delay-3">
+        <div class="cond-icon">📦</div>
+        <div>
+          <h4>Entrega e arquivos</h4>
+          <p>Você recebe os arquivos fonte completos e a página é hospedada na plataforma via conta cadastrada pelo cliente — sem dependência futura.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRÓXIMOS PASSOS ═══ -->
+<section id="proximos">
+  <div class="container">
+    <div class="s-tag reveal"><span class="s-tag-num">06</span> Próximos Passos</div>
+    <h2 class="reveal reveal-delay-1">A página está pronta.<br><em>Falta só o seu "sim".</em></h2>
+    <p class="s-lead reveal reveal-delay-2">O projeto já foi desenvolvido e está aguardando aprovação. Em menos de 48h após a confirmação, ele está no ar.</p>
+    <div class="steps-grid">
+      <div class="next-step reveal">
+        <span class="next-num">Passo 01</span>
+        <h4>Aprovação da proposta</h4>
+        <p>Confirme pelo WhatsApp indicando o escopo escolhido. Uma mensagem é suficiente para o projeto entrar em movimento.</p>
+      </div>
+      <div class="next-step reveal reveal-delay-1">
+        <span class="next-num">Passo 02</span>
+        <h4>Assinatura do contrato</h4>
+        <p>Enviamos o contrato digital para assinatura — simples, direto e sem burocracia.</p>
+      </div>
+      <div class="next-step reveal reveal-delay-2">
+        <span class="next-num">Passo 03</span>
+        <h4>Pagamento</h4>
+        <p>Pagamento via PIX ou transferência bancária, conforme o escopo aprovado.</p>
+      </div>
+      <div class="next-step reveal reveal-delay-3">
+        <span class="next-num">Passo 04</span>
+        <h4>Publicação imediata</h4>
+        <p>Página publicada na conta de hospedagem fornecida pelo cliente. Tudo pronto para começar a vender.</p>
+      </div>
+    </div>
+    <div class="cta-block reveal">
+      <a href="https://wa.me/5521970208075" id="btn-whatsapp" class="btn-cta-main">Aprovar proposta pelo WhatsApp →</a>
+    </div>
+    <div class="validity-note reveal">◷ &nbsp; Proposta válida por 7 dias · Ref. #PA-2025-04 · Confidencial</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer>
+  <div>Proposta elaborada com base nas necessidades do cliente</div>
+  <div>Proposta <span>#PA-2025-04</span> · Confidencial · Não distribuir</div>
+</footer>
+
+<script>
+/* ═══ PARTICLES ═══ */
+(function() {
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * W; this.y = Math.random() * H;
+      this.r = Math.random() * 1.5 + 0.3;
+      this.vx = (Math.random() - 0.5) * 0.3; this.vy = (Math.random() - 0.5) * 0.3;
+      this.alpha = Math.random() * 0.5 + 0.1;
+      this.color = Math.random() > 0.7 ? `rgba(255,107,53,${this.alpha})` : `rgba(255,255,255,${this.alpha * 0.4})`;
+    }
+    update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset(); }
+    draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); ctx.fillStyle = this.color; ctx.fill(); }
+  }
+  for (let i = 0; i < 80; i++) particles.push(new Particle());
+  function drawLines() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) { ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.strokeStyle = `rgba(255,107,53,${0.06 * (1 - dist/120)})`; ctx.lineWidth = 0.5; ctx.stroke(); }
+      }
+    }
+  }
+  (function loop() { ctx.clearRect(0, 0, W, H); particles.forEach(p => { p.update(); p.draw(); }); drawLines(); requestAnimationFrame(loop); })();
+})();
+
+/* ═══ SCROLL REVEAL ═══ */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+
+/* ═══ PROGRESS + NAV + FLOATING CTA ═══ */
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const max = document.body.scrollHeight - window.innerHeight;
+  document.getElementById('progress-bar').style.width = (scrolled / max * 100) + '%';
+  document.getElementById('navbar').classList.toggle('scrolled', scrolled > 60);
+  document.getElementById('floating-cta').classList.toggle('visible', scrolled > 400);
+});
+
+/* ═══ CURSOR GLOW ═══ */
+const cursorGlow = document.getElementById('cursor-glow');
+let mx = 0, my = 0, cx = 0, cy = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() { cx += (mx - cx) * 0.08; cy += (my - cy) * 0.08; cursorGlow.style.left = cx + 'px'; cursorGlow.style.top = cy + 'px'; requestAnimationFrame(animCursor); })();
+
+/* ═══ SMOOTH ANCHOR ═══ */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+/* ═══ NETFLIX INTRO FADE OUT ═══ */
+setTimeout(() => {
+  const intro = document.getElementById('netflix-intro');
+  if (intro) {
+    intro.style.transition = 'opacity 1.2s ease';
+    intro.style.opacity = '0';
+    setTimeout(() => intro.remove(), 1200);
+  }
+}, 11000);
+
+(function() {
+  const p = ['55', '21', '97020', '8075'];
+  const btn = document.getElementById('btn-whatsapp');
+  if (btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.open('https://wa.me/' + p.join(''), '_blank');
+    });
+  }
+})();
+
+</script>
+</body>
+</html>
